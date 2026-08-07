@@ -18,9 +18,8 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     @Transactional(readOnly = true)
     public List<PublisherResponseDto> findActiveByCountry(String country) {
-        return repository.findAll()
+        return repository.findByCountryIgnoreCaseAndActiveTrueAndDeletedFalseOrderByNameAsc(country)
                 .stream()
-                .filter(entity -> !entity.isDeleted())
                 .map(PublisherMapper::toResponse)
                 .toList();
     }

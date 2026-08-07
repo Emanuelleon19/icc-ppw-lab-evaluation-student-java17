@@ -16,7 +16,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @RequestMapping("/publishers")
 @Tag(name = "Publishers", description = "Consultas de editoriales")
-
 public class PublisherController {
     private final PublisherService service;
 
@@ -25,7 +24,8 @@ public class PublisherController {
     }
 
     @GetMapping("/active")
-
+    @PreAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Listar editoriales activas por país")
     public List<PublisherResponseDto> findActiveByCountry(
             @Parameter(description = "País exacto, sin distinguir mayúsculas", example = "Ecuador") @RequestParam String country) {
