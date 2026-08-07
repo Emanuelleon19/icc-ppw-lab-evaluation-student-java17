@@ -24,6 +24,8 @@ public class UserController {
     }
 
     @GetMapping("/active-readers")
+    @PreAuthorize("hasRole('ADMIN')")
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Listar usuarios activos desde una edad mínima")
     public List<UserResponseDto> findActiveReaders(
             @Parameter(description = "Edad mínima inclusiva", example = "21") @RequestParam(defaultValue = "21") Integer minAge) {
