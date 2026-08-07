@@ -1,4 +1,9 @@
 server:
+  port: 8080
+  servlet: 
+    context-path: /api
+  error:
+    include-stacktrace: never
 
 spring:
   application:
@@ -50,3 +55,4 @@ jwt:
   issuer: library-evaluation-api
   header: Authorization
   prefix: "Bearer "
+  
